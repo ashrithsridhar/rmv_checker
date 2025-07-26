@@ -86,7 +86,7 @@ def page_has_july_or_august(html: str) -> bool:
     """
     soup = BeautifulSoup(html, "html.parser")
     text = soup.get_text(separator=" ", strip=True).lower()
-    return ("july" in text) or ("august" in text)
+    return ("jul" in text) or ("aug" in text) or ("sep" in text)
 
 
 def send_notification(message: str, title: str = "RMV Appointment Checker") -> None:
