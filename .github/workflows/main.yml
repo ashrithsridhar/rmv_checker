@@ -1,22 +1,22 @@
 name: RMV Appointment Checker
 
+# Only manual or API dispatch kicks it off;
+# we rely on the chainer for continuous runs.
 on:
-  # Manual “Run workflow” button
   workflow_dispatch:
-  # Every 5 minutes on the cron grid
-  schedule:
-    - cron: "*/5 * * * *"
 
 jobs:
   check-appointment:
     runs-on: ubuntu-latest
+    # Must be ≥ 330 minutes; GitHub max is 360
+    timeout-minutes: 360
     env:
-      # Pushover credentials – add these in Settings → Secrets
+      # your secrets
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
       PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
 
-      # Loop settings (optional)
-      LOOP_COUNT: 5
+      # 5h30 loop
+      LOOP_COUNT: 330 # 5.5 hrs × 60 min
       SLEEP_SECONDS: 60
 
     steps:
