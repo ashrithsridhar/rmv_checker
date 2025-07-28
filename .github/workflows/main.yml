@@ -1,9 +1,9 @@
 name: RMV Appointment Checker
 
 on:
-  # 1) Manual “Run workflow” button
+  # Manual “Run workflow” button
   workflow_dispatch:
-  # 2) Every 5 minutes (GitHub’s minimum cron)
+  # Every 5 minutes on the cron grid
   schedule:
     - cron: "*/5 * * * *"
 
@@ -11,11 +11,11 @@ jobs:
   check-appointment:
     runs-on: ubuntu-latest
     env:
-      # Pushover keys – set these in Settings → Secrets
+      # Pushover credentials – add these in Settings → Secrets
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
       PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
 
-      # Loop settings (optional overrides)
+      # Loop settings (optional)
       LOOP_COUNT: 5
       SLEEP_SECONDS: 60
 
