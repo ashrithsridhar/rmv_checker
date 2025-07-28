@@ -12,7 +12,7 @@ from playwright.async_api import async_playwright
 DEFAULT_URL = (
     "https://rmvmassdotappt.cxmflow.com/Appointment/Index/"
     "2c052fc7-571f-4b76-9790-7e91f103c408?"
-    "AccessToken=7615a8d2-5eb1-4924-9a56-106b5605267e"
+    "AccessToken=3abb3e0f-6332-40f7-90ab-c405eaf8a9ba"
 )
 DATA_ID = "20"  # Worcester button data-id
 
@@ -41,7 +41,7 @@ async def fetch_after_click() -> str:
 def page_has_july_or_august(html: str) -> bool:
     """Return True if 'Jul', 'Aug', or 'Sep' appears in the HTML text."""
     text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True).lower()
-    return any(m in text for m in ("jul", "aug", "sep"))
+    return any(m in text for m in ("jul", "aug"))
 
 def send_notification(message: str, title: str = "RMV Checker"):
     """Send a push via Pushover, if credentials are set."""

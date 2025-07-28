@@ -12,7 +12,7 @@ from playwright.async_api import async_playwright
 DEFAULT_URL = (
     "https://rmvmassdotappt.cxmflow.com/Appointment/Index/"
     "2c052fc7-571f-4b76-9790-7e91f103c408?"
-    "AccessToken=6c1d0e9a-5e48-4ca1-b7da-0c329a0e0e51"
+    "AccessToken=3abb3e0f-6332-40f7-90ab-c405eaf8a9ba"
 )
 DATA_ID = "20"  # Worcester button data-id
 
