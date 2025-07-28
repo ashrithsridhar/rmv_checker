@@ -41,7 +41,7 @@ async def fetch_after_click() -> str:
 def page_has_july_or_august(html: str) -> bool:
     """Return True if 'Jul', 'Aug', or 'Sep' appears in the HTML text."""
     text = BeautifulSoup(html, "html.parser").get_text(" ", strip=True).lower()
-    return any(m in text for m in ("jul", "aug", "sep"))
+    return any(m in text for m in ("jul", "aug"))
 
 def send_notification(message: str, title: str = "RMV Checker"):
     """Send a push via Pushover, if credentials are set."""
