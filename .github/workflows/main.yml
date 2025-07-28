@@ -1,38 +1,29 @@
-# .github/workflows/main.yml
 name: RMV Appointment Checker
 
 on:
   # 1) Manual “Run workflow” button
   workflow_dispatch:
-
-  # 2) Kick off at 5‑min grid to bootstrap
+  # 2) Every 5 minutes (GitHub’s minimum cron)
   schedule:
     - cron: "*/5 * * * *"
-
-  # 3) As soon as *this* workflow completes, trigger it again
-  workflow_run:
-    workflows: ["RMV Appointment Checker"]
-    types: [completed]
-
-# Ensure only one run at a time (cancels any stale run if a new one starts)
-concurrency:
-  group: rmv-checker-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   check-appointment:
     runs-on: ubuntu-latest
     env:
+      # Pushover keys – set these in Settings → Secrets
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
       PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
+
+      # Loop settings (optional overrides)
       LOOP_COUNT: 5
       SLEEP_SECONDS: 60
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python & Playwright
+      - name: Set up Python 3.x
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
@@ -43,5 +34,5 @@ jobs:
           pip install playwright requests beautifulsoup4
           python -m playwright install
 
-      - name: Run RMV checker
+      - name: Run RMV appointment checker
         run: python check_appointment.py

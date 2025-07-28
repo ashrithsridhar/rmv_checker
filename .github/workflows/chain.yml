@@ -1,0 +1,18 @@
+name: RMV Checker Chainer
+
+on:
+  workflow_run:
+    # fires when “RMV Appointment Checker” finishes
+    workflows: ["RMV Appointment Checker"]
+    types: [completed]
+
+jobs:
+  re-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Re‑dispatch RMV Appointment Checker
+        uses: peter-evans/workflow-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: main.yml
+          ref: main
